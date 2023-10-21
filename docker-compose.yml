@@ -1,0 +1,54 @@
+version: "24.0.6"
+services:
+  discovery:
+    build: ./eureka-sever
+    ports:
+    - "8761:8761"
+    image: "eureka"
+
+   # MySQL Database
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=profile
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
+  profile:
+    build: ./profile-service
+    environment:
+    - SPRING_APPLICATION_NAME=profile-service
+    - SERVER_PORT=8089
+    - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/profile?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=
+    - SPRING_JPA_OPEN-IN-VIEW=false
+    - SPRING_JPA_SHOW-SQL=true
+    - SPRING_JPA_HIBERNATE_DDL-AUTO=update  
+
+    - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5Dialect
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+    - EUREKA_CLIENT_REGISTER-WITH-EUREKA=true
+    ports:
+    - "8089:8089"
+    image: "eureka"
+    depends_on:
+    - discovery
+    - mysql
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_APPLICATION_NAME=api-gateway
+      - SERVER_PORT=8081
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka 
+      - EUREKA_CLIENT_REGISTER-WITH-EUREKA=true
+    depends_on:
+      - discovery 
+    image: "gateway"  
+  
+    
