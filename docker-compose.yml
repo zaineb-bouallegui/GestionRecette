@@ -39,6 +39,41 @@ services:
     - mysql
 
   
+  profile:
+    build: ./profile-service
+    environment:
+    - SPRING_APPLICATION_NAME=profile-service
+    - SERVER_PORT=8089
+    - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/profile?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=
+    - SPRING_JPA_OPEN-IN-VIEW=false
+    - SPRING_JPA_SHOW-SQL=true
+    - SPRING_JPA_HIBERNATE_DDL-AUTO=update  
+
+    - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5Dialect
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+    - EUREKA_CLIENT_REGISTER-WITH-EUREKA=true
+    ports:
+    - "8089:8089"
+    image: "eureka"
+    depends_on:
+    - discovery
+    - mysql
+
+
+  theme:
+    build: ./Theme
+    environment:
+    - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+    ports:
+    - 8088:8088
+    image: theme-service
+    depends_on:
+    - discovery
+  
+
+  
   api-gateway:
     build: ./api-gateway
     ports:
@@ -51,6 +86,8 @@ services:
     depends_on:
       - discovery 
     image: "gateway"
+
+
 
 
 
