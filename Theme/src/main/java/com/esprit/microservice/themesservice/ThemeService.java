@@ -68,4 +68,16 @@ public class ThemeService {
 			return csvContent.toString();
 		}
 	}
+
+
+
+	public List<Theme> getThemesByCategory(Categorie categorie) {
+		// Assuming you have a mapping between Theme and Categorie in your JPA entities.
+		// This assumes that you have a @OneToMany or @ManyToMany relationship between Theme and Categorie.
+
+		// You can use a repository method to fetch themes by category.
+		List<Theme> themes = themeRepository.findByCategorie(categorie);
+
+		return themes;
+	}
 }

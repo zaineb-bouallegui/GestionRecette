@@ -217,8 +217,34 @@ public ResponseEntity<String> addThemeToCategory(
 	} else {
 		return new ResponseEntity<>("Erreur d'authentification.", HttpStatus.UNAUTHORIZED);
 	}
+
 }
 
+	@GetMapping("/categorie/{categorieId}/themes")
+	public ResponseEntity<List<Theme>> getAllThemesInCategory(
+			@PathVariable("categorieId") int categorieId,
+			KeycloakAuthenticationToken auth
+	) {
+		// Check if the user has the required Keycloak roles to access this endpoint.
+		if (auth != null) {
+			KeycloakPrincipal<KeycloakSecurityContext> principal = (KeycloakPrincipal<KeycloakSecurityContext>) auth.getPrincipal();
+			KeycloakSecurityContext context = principal.getKeycloakSecurityContext();
+			if (context.getToken().getRealmAccess().isUserInRole("user")) {
+				Categorie categorie = categorieService.getCategorieById(categorieId);
+
+				if (categorie != null) {
+					List<Theme> themes = themeService.getThemesByCategory(categorie); // Supposons que vous ayez une méthode pour récupérer les thèmes par catégorie
+					return new ResponseEntity<>(themes, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				}
+			} else {
+				return new ResponseEntity<>( HttpStatus.FORBIDDEN);
+			}
+		} else {
+			return new ResponseEntity<>( HttpStatus.UNAUTHORIZED);
+		}
+	}
 
 
 
