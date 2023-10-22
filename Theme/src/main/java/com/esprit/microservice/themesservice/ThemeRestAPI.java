@@ -188,26 +188,38 @@ public class ThemeRestAPI {
 
 /********************************Fonctions avancées********************************************/
 
-// Dans le contrôleur
 @PostMapping("/categorie/{categorieId}/theme/{themeId}")
 public ResponseEntity<String> addThemeToCategory(
 		@PathVariable("categorieId") int categorieId,
-		@PathVariable("themeId") int themeId
+		@PathVariable("themeId") int themeId,
+		KeycloakAuthenticationToken auth
 ) {
-	Categorie categorie = categorieService.getCategorieById(categorieId);
-	Theme theme = themeService.getThemeById(themeId);
+	// Check if the user has the required Keycloak roles to access this endpoint.
+	if (auth != null) { // Use 'auth' here, not 'principal'
+		KeycloakPrincipal<KeycloakSecurityContext> principal = (KeycloakPrincipal<KeycloakSecurityContext>) auth.getPrincipal();
+		KeycloakSecurityContext context = principal.getKeycloakSecurityContext();
+		if (context.getToken().getRealmAccess().isUserInRole("admin")) {
+			Categorie categorie = categorieService.getCategorieById(categorieId);
+			Theme theme = themeService.getThemeById(themeId);
 
-	if (categorie != null && theme != null) {
-		// Assurez-vous que le thème appartient actuellement à une autre catégorie (s'il s'agit d'une relation de un à un)
-		// Et mettez à jour la relation
-		theme.setCategorie(categorie);
-		themeService.updateTheme(themeId, theme);
+			if (categorie != null && theme != null) {
+				// Check and update the relationship between theme and category
+				theme.setCategorie(categorie);
+				themeService.updateTheme(themeId, theme);
 
-		return new ResponseEntity<>("Thème ajouté à la catégorie.", HttpStatus.OK);
+				return new ResponseEntity<>("Thème ajouté à la catégorie.", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("La catégorie ou le thème n'existe pas.", HttpStatus.NOT_FOUND);
+			}
+		} else {
+			return new ResponseEntity<>("Accès non autorisé. L'utilisateur n'a pas les rôles nécessaires.", HttpStatus.FORBIDDEN);
+		}
 	} else {
-		return new ResponseEntity<>("La catégorie ou le thème n'existe pas.", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Erreur d'authentification.", HttpStatus.UNAUTHORIZED);
 	}
 }
+
+
 
 
 
