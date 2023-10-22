@@ -13,5 +13,6 @@ public interface ThemeRepository extends JpaRepository<Theme,Integer> {
 	@Query("select c from Theme c where c.titre like :titre")
 	public Page<Theme> themeByTitre(@Param("titre") String n, Pageable pageable);
 	List<Theme> findByCategorie(Categorie categorie);
+	List<Theme> findByCategorieNom(@Param("categorieName") String categorieName);
 	   
 }

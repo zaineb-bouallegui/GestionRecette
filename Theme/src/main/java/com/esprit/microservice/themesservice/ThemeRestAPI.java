@@ -246,6 +246,22 @@ public ResponseEntity<String> addThemeToCategory(
 		}
 	}
 
+	@GetMapping("/categorienom/{categorieName}")
+	public ResponseEntity<List<Theme>> getThemesByCategorieName(@PathVariable("categorieName") String categorieName, KeycloakAuthenticationToken auth) {
+		if (auth != null) {
+			KeycloakPrincipal<KeycloakSecurityContext> principal = (KeycloakPrincipal<KeycloakSecurityContext>) auth.getPrincipal();
+			KeycloakSecurityContext context = principal.getKeycloakSecurityContext();
+
+			// Check if the user has the "user" role in Keycloak
+			if (context.getToken().getRealmAccess().isUserInRole("admin")) {
+				List<Theme> themes = themeService.getThemesByCategorieName(categorieName);
+				return new ResponseEntity<>(themes, HttpStatus.OK);
+			}
+		}
+
+		// Return FORBIDDEN if the user doesn't have the "user" role or if the authentication token is null
+		return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	}
 
 
 

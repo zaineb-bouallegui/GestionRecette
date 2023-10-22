@@ -80,4 +80,8 @@ public class ThemeService {
 
 		return themes;
 	}
+
+	public List<Theme> getThemesByCategorieName(String categorieName) {
+		return themeRepository.findByCategorieNom(categorieName);
+	}
 }
