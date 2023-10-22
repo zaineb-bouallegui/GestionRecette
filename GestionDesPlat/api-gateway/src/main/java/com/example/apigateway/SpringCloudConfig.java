@@ -11,15 +11,15 @@ public class SpringCloudConfig {
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(r -> r.path("/api/candidats/**")
-                        .uri("http://localhost:8088/")
-                ).build();
-
-//Micro-service 2
-//                .route(r -> r.path("/consumer/**")
-//                        .uri("http://localhost:8082/")
-//                       .id("consumerModule"))
-
+                .route("plats_route", r -> r
+                        .path("/api/plats/**")
+                        .uri("http://localhost:8088")
+                )
+                .route("planifications_route", r -> r
+                        .path("/api/planifications/**")
+                        .uri("http://localhost:8088")
+                )
+                .build();
     }
 
 }
