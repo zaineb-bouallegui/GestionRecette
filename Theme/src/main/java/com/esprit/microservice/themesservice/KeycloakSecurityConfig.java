@@ -43,13 +43,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .httpBasic()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/*").hasAuthority("user")
+                .antMatchers("/h2/**").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/themes/user/*").hasAuthority("user")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/themes/admin/**").hasAuthority("admin")
+                .antMatchers("/api/themes/**").permitAll()
+
                 .anyRequest()
                 .authenticated();
     }

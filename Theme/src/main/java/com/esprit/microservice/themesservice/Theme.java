@@ -1,10 +1,10 @@
 package com.esprit.microservice.themesservice;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -21,6 +21,12 @@ public class Theme implements Serializable{
 	public int getId() {
 		return id;
 	}
+
+	// Un thème appartient à une seule catégorie
+	@ManyToOne
+	@JoinColumn(name = "categorie_id")
+	@JsonBackReference
+	private Categorie categorie;
 
 
 
@@ -57,5 +63,12 @@ public class Theme implements Serializable{
 		this.titre = titre;
 	}
 
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 
 }

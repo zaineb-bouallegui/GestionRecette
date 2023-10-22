@@ -16,7 +16,7 @@ public class ThemesApplication {
 		SpringApplication.run(com.esprit.microservice.themesservice.ThemesApplication.class, args);
 	}
 	
-	 @Bean
+	/* @Bean
 	    ApplicationRunner init(ThemeRepository repository) {
 	        return args -> {
 	            Stream.of("thermomix", "detox", "bebe","traditionnelle").forEach(titre -> {
@@ -24,6 +24,6 @@ public class ThemesApplication {
 	            });
 	            repository.findAll().forEach(System.out::println);
 	        };
-	    }
+	    }*/
 
 }
