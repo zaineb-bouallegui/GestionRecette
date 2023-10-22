@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PlanificationService implements IPlanificationService {
@@ -49,7 +47,7 @@ public class PlanificationService implements IPlanificationService {
             newPlanification.setUserId(idUser);
 
             planificationRepository.save(newPlanification);
-            return "Planification réussie"+plat; // Corrected message
+            return "Planification réussie";
         } else {
             return "Planification non réussie"+planification.getId(); // Corrected message
         }
@@ -58,23 +56,95 @@ public class PlanificationService implements IPlanificationService {
 
 
     @Override
-    public Planification getPlanificationById(Long id) {
-        return planificationRepository.findById(id).orElse(null);
-    }
+    public Map<String, Object> getPlanificationWithPlatDetails(Long planificationId) {
+        Planification planification = planificationRepository.findById(planificationId).orElse(null);
+        Map<String, Object> result = new HashMap<>();
 
-    @Override
-    public List<Planification> getAllPlanifications() {
-        return planificationRepository.findAll();
-    }
+        if (planification != null) {
+            result.put("id", planification.getId());
+            result.put("userId", planification.getUserId());
+            result.put("planDateTime", planification.getPlanDateTime());
 
-    @Override
-    public Planification updatePlanification(Long id, Planification planification) {
-        if (planificationRepository.existsById(id)) {
-            planification.setId(id);
-            return planificationRepository.save(planification);
+            Plat plat = planification.getPlat();
+            if (plat != null) {
+                result.put("platName", plat.getNom());
+                result.put("platDescription", plat.getDescription());
+                result.put("platCategorie", plat.getCategorie());
+                // Add other plat details as needed
+            }
         }
+
+        return result;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllPlanificationsWithDetails() {
+        List<Planification> planifications = planificationRepository.findAll();
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (Planification planification : planifications) {
+            Map<String, Object> planificationMap = new HashMap<>();
+            planificationMap.put("id", planification.getId());
+            planificationMap.put("userId", planification.getUserId());
+            planificationMap.put("planDateTime", planification.getPlanDateTime());
+
+            // Add plat details from the associated Plat entity
+            Plat plat = planification.getPlat();
+            if (plat != null) {
+                planificationMap.put("platName", plat.getNom());
+                planificationMap.put("platDescription", plat.getDescription());
+                planificationMap.put("platCategorie", plat.getCategorie());
+                // Add other plat details as needed
+            }
+
+            result.add(planificationMap);
+        }
+
+        return result;
+    }
+
+    public List<Map<String, Object>> getPlanificationsWithDetailsForUser(Long userId) {
+        List<Planification> planifications = planificationRepository.findByUserId(userId);
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (Planification planification : planifications) {
+            Map<String, Object> planificationMap = new HashMap<>();
+            planificationMap.put("id", planification.getId());
+            planificationMap.put("userId", planification.getUserId());
+            planificationMap.put("planDateTime", planification.getPlanDateTime());
+
+            // Add plat details from the associated Plat entity
+            Plat plat = planification.getPlat();
+            if (plat != null) {
+                planificationMap.put("platName", plat.getNom());
+                planificationMap.put("platDescription", plat.getDescription());
+                planificationMap.put("platCategorie", plat.getCategorie());
+                // Add other plat details as needed
+            }
+
+            result.add(planificationMap);
+        }
+
+        return result;
+    }
+
+    @Override
+    public Planification updatePlanification(Long id, Planification updatedPlanification) {
+        Planification existingPlanification = planificationRepository.findById(id).orElse(null);
+
+        if (existingPlanification != null) {
+            // Update the fields you want to allow from updatedPlanification
+            existingPlanification.setPlanDateTime(updatedPlanification.getPlanDateTime());
+
+            // You can add more fields to update if needed
+
+            return planificationRepository.save(existingPlanification);
+        }
+
         return null;
     }
+
+
 
     @Override
     public String deletePlanification(Long id) {

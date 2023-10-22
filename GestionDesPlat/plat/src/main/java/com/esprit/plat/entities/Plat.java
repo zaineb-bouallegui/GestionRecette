@@ -1,4 +1,7 @@
 package com.esprit.plat.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +18,11 @@ public class Plat {
     private String nom;
     private String description;
     private CategoriePlat categorie;
-    @OneToOne(optional = true)
+    //@JsonIgnore
+    @OneToOne(optional = true, fetch = FetchType.EAGER)
     private Recette recette;
     @OneToMany(mappedBy = "plat")
+    //@JsonManagedReference
     private List<Planification> planifications;
 
     // Énumération pour les catégories (sucré ou salé)

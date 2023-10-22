@@ -1,5 +1,9 @@
 package com.esprit.plat.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,7 +20,8 @@ public class Planification {
     // Reference to the planned meal (you can customize this based on your application)
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+   // @JsonBackReference
     @JoinColumn(name = "plat_id")
     private Plat plat;
 

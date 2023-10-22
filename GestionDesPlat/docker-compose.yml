@@ -1,0 +1,30 @@
+version: "24.0.6"
+services:
+  discovery:
+    build: ./EurekaServer
+    ports:
+    - 8761:8761
+    image: eureka_image
+
+  plat:
+    build: ./plat
+    environment:
+    - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+    ports:
+    - 8082:8082
+    image: plat
+    depends_on:
+    - discovery
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_APPLICATION_NAME=api-gateway
+      - SERVER_PORT=8081
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka 
+      - EUREKA_CLIENT_REGISTER-WITH-EUREKA=true
+    depends_on:
+      - discovery 
+    image: "gateway"

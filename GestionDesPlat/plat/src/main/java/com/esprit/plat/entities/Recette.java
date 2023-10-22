@@ -1,5 +1,9 @@
 package com.esprit.plat.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +15,8 @@ public class Recette {
 
         private String titre;
         private String description;
-
-        @OneToOne(mappedBy = "recette", optional = true)
+        @JsonIgnore
+        @OneToOne(mappedBy = "recette", optional = true, fetch = FetchType.LAZY)
         private Plat plat;
 
         // Constructors
@@ -63,4 +67,6 @@ public class Recette {
         public void setPlat(Plat plat) {
                 this.plat = plat;
         }
+
+
 }
