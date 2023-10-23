@@ -1,45 +1,36 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
+require('dotenv').config();
 const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const router = require("./routes/user-routes");
-const uri = 'mongodb+srv://bouallaguizaineb:${process.env.MONGODB_PASSWORORD}@cluster0.wgy74kd.mongodb.net/?retryWrites=true&w=majority'
+const uri = process.env.URI; 
+
 app.use(express.json());
 app.use("/api", router);
 
-
-
-
-
-
-
-
-
-
-
-// mongoose
-// .connect(
-// //`mongodb+srv://zaineb:${process.env.MONGODB_PASSWORORD}@cluster0.5wu3lmt.mongodb.net/PiDev?retryWrites=true&w=majority`
- 
-// `mongodb+srv://bouallaguizaineb:${process.env.MONGODB_PASSWORORD}@cluster0.wgy74kd.mongodb.net/?retryWrites=true&w=majority`  )
-// .then(() => {
-    
-//  app.listen(5000);
-//     console.log("Database is connected! Listening to localhost 3001");
-
-// })
-// .catch((err) => console.log(err));
-
 mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const connection = mongoose.connection;
+
+connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
+});
+
+connection.once("open", () => {
+  console.log("MongoDB connected");
+
+  server.listen(5000, () => {
+    console.log("Server is running on port 5000");
   });
-  
-  
-  const connection = mongoose.connection;
-  connection.once("open", () => {
-    console.log("db connected");
-  });
+});
+
+server.on("error", (err) => {
+  console.error("Server error:", err);
+});
+
 module.exports = app;
