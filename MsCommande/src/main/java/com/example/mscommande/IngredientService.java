@@ -3,6 +3,7 @@ package com.example.mscommande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class IngredientService {
             existingIngredient.setQuantite(newIngredient.getQuantite());
             existingIngredient.setUniteDeMesure(newIngredient.getUniteDeMesure());
             existingIngredient.setImageUrl(newIngredient.getImageUrl());
-
+            existingIngredient.setStock(newIngredient.getStock());
             return ingredientRepository.save(existingIngredient);
         } else
             return null;
@@ -47,4 +48,31 @@ public class IngredientService {
     public Optional<Ingredient> getIngredientById(int id) {
         return ingredientRepository.findById(id);
     }
+    public List<Ingredient> getIngredientsInStock() {
+        return ingredientRepository.findByStockGreaterThan(0);
+    }
+
+    public List<Ingredient> searchIngredients(String partialName, String unitOfMeasure, boolean inStock) {
+        List<Ingredient> results = new ArrayList<>();
+
+
+        if (partialName != null) {
+            List<Ingredient> byPartialName = ingredientRepository.findByPartialName(partialName);
+            results.addAll(byPartialName);
+        }
+
+        if (unitOfMeasure != null) {
+            List<Ingredient> byUnitOfMeasure = ingredientRepository.findByUniteDeMesure(unitOfMeasure);
+            results.addAll(byUnitOfMeasure);
+        }
+
+        if (inStock) {
+            List<Ingredient> byStock = ingredientRepository.findByStockGreaterThan(0);
+            results.addAll(byStock);
+        }
+
+
+        return results;
+    }
+
 }

@@ -15,6 +15,15 @@ public class Ingredient implements Serializable {
     private double quantite;
     private String uniteDeMesure;
     private String imageUrl;
+    private double stock;
+
+    public double getStock() {
+        return stock;
+    }
+
+    public void setStock(double stock) {
+        this.stock = stock;
+    }
 
     public int getId() {
         return id;
@@ -62,5 +71,6 @@ public class Ingredient implements Serializable {
         this.quantite = quantite;
         this.uniteDeMesure = uniteDeMesure;
         this.imageUrl = imageUrl;
+        this.stock = stock;
     }
 }

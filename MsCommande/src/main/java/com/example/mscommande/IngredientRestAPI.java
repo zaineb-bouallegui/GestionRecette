@@ -26,7 +26,7 @@ public class IngredientRestAPI {
     public ResponseEntity<Ingredient> createIngredient(@RequestBody Ingredient ingredient, KeycloakAuthenticationToken auth) {
         KeycloakPrincipal<KeycloakSecurityContext> principal = (KeycloakPrincipal<KeycloakSecurityContext>) auth.getPrincipal();
         KeycloakSecurityContext context = principal.getKeycloakSecurityContext();
-        boolean hasUserRole = context.getToken().getRealmAccess().isUserInRole("user");
+        boolean hasUserRole = context.getToken().getRealmAccess().isUserInRole("admin");
 
         if (hasUserRole) {
             return new ResponseEntity<>(ingredientService.addIngrentient(ingredient), HttpStatus.OK);
@@ -106,6 +106,31 @@ public class IngredientRestAPI {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
+    @GetMapping(value = "/instock", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Ingredient>> getIngredientsInStock() {
+        List<Ingredient> ingredientsInStock = ingredientService.getIngredientsInStock();
+        return new ResponseEntity<>(ingredientsInStock, HttpStatus.OK);
+    }
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Ingredient>> searchIngredients(
+            @RequestParam(value = "partialName", required = false) String partialName,
+            @RequestParam(value = "unitOfMeasure", required = false) String unitOfMeasure,
+            @RequestParam(value = "inStock", required = false) boolean inStock,
+            KeycloakAuthenticationToken auth) {
+
+        List<Ingredient> ingredients = ingredientService.searchIngredients(partialName, unitOfMeasure, inStock);
+
+        if (ingredients != null && !ingredients.isEmpty()) {
+            return new ResponseEntity<>(ingredients, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 
 
 
