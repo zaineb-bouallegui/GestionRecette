@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 8089
-ADD target/Profile-0.0.1.jar profile.jar
+ADD target/Profile-0.0.1-SNAPSHOT.jar.jar profile.jar
 ENTRYPOINT ["java","-jar","profile.jar"]

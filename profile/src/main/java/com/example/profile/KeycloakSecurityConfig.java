@@ -44,16 +44,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .httpBasic()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/*").hasAuthority("user")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/profile/user/*").hasAuthority("user")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/profile/admin/**").hasAuthority("admin")
+                .antMatchers("/api/profile/**").permitAll()
                 .anyRequest()
                 .authenticated();
     }
+
 
   
 	@Bean(BeanIds.AUTHENTICATION_MANAGER)

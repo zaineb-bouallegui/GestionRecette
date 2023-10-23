@@ -15,6 +15,12 @@ public class Profile implements Serializable {
     private int id;
 
     private String nom, prenom,img;
+    private boolean isPublic;
+    private boolean active = true;
+    public boolean isActive() {
+        return active;
+    }
+
 
     public int getId() {
         return id;
@@ -32,6 +38,10 @@ public class Profile implements Serializable {
         return img;
     }
 
+    public boolean isPublic() {
+        return isPublic;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -43,6 +53,15 @@ public class Profile implements Serializable {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public Profile() {
         super();
 

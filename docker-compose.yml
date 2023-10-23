@@ -3,15 +3,15 @@ services:
   discovery:
     build: ./eureka-sever
     ports:
-    - "8761:8761"
-    image: "eureka"
+    - 8761:8761
+    image: eureka
 
    # MySQL Database
   mysql:
     image: mysql:5.7
     container_name: mysql
     ports:
-      - "3307:3306"
+      - 3307:3306
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=profile
@@ -33,7 +33,7 @@ services:
     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
     - EUREKA_CLIENT_REGISTER-WITH-EUREKA=true
     ports:
-    - "8089:8089"
+    - 8089:8089
     image: "eureka"
     depends_on:
     - discovery
