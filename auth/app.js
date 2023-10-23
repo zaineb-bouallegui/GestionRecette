@@ -2,18 +2,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const http = require("http");
+
 const app = express();
 const server = http.createServer(app);
+const cookieParser = require('cookie-parser');
 const router = require("./routes/user-routes");
 const uri = process.env.URI; 
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api", router);
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 
 const connection = mongoose.connection;
 
