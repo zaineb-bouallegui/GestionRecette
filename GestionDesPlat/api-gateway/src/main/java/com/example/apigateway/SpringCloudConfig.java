@@ -13,10 +13,14 @@ public class SpringCloudConfig {
         return builder.routes()
                 .route("plats_route", r -> r
                         .path("/api/plats/**")
-                        .uri("http://localhost:8088")
+                        .uri("http://localhost:8082")
                 )
                 .route("planifications_route", r -> r
                         .path("/api/planifications/**")
+                        .uri("http://localhost:8082")
+                )
+                .route("theme_route", r -> r
+                        .path("/api/themes/**")
                         .uri("http://localhost:8088")
                 )
                 .build();
