@@ -1,0 +1,42 @@
+<h2> MarketPlace</h2>
+<div class="row">
+  <div class="col-md-6">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Rechercher un ingrédient">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">Rechercher</button>
+      </div>
+    </div>
+  </div>  
+    <div class="col-md-6">
+      <a [routerLink]="['/createIngredient']" class="btn btn-light" role="button">Ajouter un Ingrédient</a>
+    </div>
+  </div>
+<table class = "table table-striped">
+    <thead>
+          
+        <tr>
+            <th>nom</th>
+            <th>quantite</th>
+            <th>uniteDeMesure</th>
+            <th>image</th>  
+            <th>stock</th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let ingredient of ingredients" >
+            <td> {{ingredient.nom}} </td>
+            <td> {{ingredient.quantite}} </td>
+            <td> {{ingredient.uniteDeMesure}} </td>
+            <td> {{ingredient.imageUrl}} </td>
+            <td> {{ingredient.stock}} </td>
+            <td>
+                <button (click)="updateIngredient(ingredient.id)" class="btn btn-outline-primary">Update</button>
+                <button (click)="deleteIngredient(ingredient.id)" class="btn btn-outline-danger ml-2">Delete</button>
+                <button (click)="ingredientDetails(ingredient.id)" class="btn btn-outline-info ml-2">View</button>
+              </td>
+              
+        </tr>
+    </tbody>
+</table>
