@@ -42,13 +42,10 @@ public class keycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .httpBasic()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/ms/*").hasAuthority("user")
+                .antMatchers("/ms/**").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/ms/recette/add/*").hasAuthority("user")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/ms/recette/delete/**").hasAuthority("admin")
+                .antMatchers("/ms/recette/**").permitAll()
                 .anyRequest()
                 .authenticated();
     }

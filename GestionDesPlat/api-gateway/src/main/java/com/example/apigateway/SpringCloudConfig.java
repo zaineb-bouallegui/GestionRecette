@@ -13,15 +13,27 @@ public class SpringCloudConfig {
         return builder.routes()
                 .route("plats_route", r -> r
                         .path("/api/plats/**")
-                        .uri("http://localhost:8082")
+                        .uri("http://plat:8082")
                 )
                 .route("planifications_route", r -> r
                         .path("/api/planifications/**")
-                        .uri("http://localhost:8082")
+                        .uri("http://plat:8082")
                 )
                 .route("theme_route", r -> r
                         .path("/api/themes/**")
-                        .uri("http://localhost:8088")
+                        .uri("http://theme:8088")
+                )
+                .route("recette_route", r -> r
+                        .path("/ms/recette/**")
+                        .uri("http://recette:8086")
+                )
+                .route("ingrediants_route", r -> r
+                        .path("/api/ingrediants/**")
+                        .uri("http://ingrediants:8087")
+                )
+                .route("profile_route" ,r -> r
+                        .path("/api/profile/**")
+                        .uri("http://profile:8090")
                 )
                 .build();
     }
