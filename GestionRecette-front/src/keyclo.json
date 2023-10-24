@@ -1,0 +1,10 @@
+{
+    "clientId": "plat-service",
+    "clientSecret": "2613909a-57a7-4795-b9aa-23fa7b1d6fcc",
+    "accessTokenUrl": "http://localhost:8080/auth/realms/JobBoardKeycloack/protocol/openid-connect/token",
+    "tokenName": "access_token",
+    "grantType": "password",
+    "username": "zaineb",
+    "password": "zaineb",
+    "scope": "openid"
+  }
