@@ -1,0 +1,9 @@
+.star-rating {
+    display: inline-block;
+  }
+  
+  .star {
+    font-size: 24px; /* Adjust the font size to control the size of the stars */
+    color: #f8d61c; /* Color of the filled stars */
+  }
+  
