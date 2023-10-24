@@ -1,0 +1,25 @@
+<a [routerLink]="['/theme']" class="btn btn-info mb-2">Ajouter theme</a>
+<h2>Liste themes</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">Titre</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Nombre recettes</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let theme of themes">
+            <td class="text-center">{{theme.titre}}</td>
+            <td class="text-center">{{theme.description}}</td>
+            <td class="text-center">{{theme.nombre_rct}}</td>
+            <td class="text-center">
+                <button (click)="updateTheme(theme.id)" class="btn btn-info">Modifier</button>
+                <button (click)="deleteTheme(theme.id)" class="btn btn-danger" style="margin-left: 10px"> Supprimer</button>
+                <button (click)="themeDetails(theme.id)" class="btn btn-primary" style="margin-left: 10px"> Details</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
