@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit(eventForm)" #eventForm="ngForm">
+    <div class="form-group">
+      <label for="title">Titre de l'événement</label>
+      <input type="text" id="title" name="title" class="form-control" [(ngModel)]="event.title" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description de l'événement</label>
+      <textarea id="description" name="description" class="form-control" [(ngModel)]="event.description" required></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="lieu">Lieu de l'événement</label>
+      <input type="text" id="lieu" name="lieu" class="form-control" [(ngModel)]="event.lieu" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="event_theme">Thème de l'événement</label>
+      <input type="text" id="event_theme" name="event_theme" class="form-control" [(ngModel)]="event.event_theme" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="Nbre_participant">Nombre de participants</label>
+      <input type="number" id="Nbre_participant" name="Nbre_participant" class="form-control" [(ngModel)]="event.Nbre_participant" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="imageUrl">URL de l'image</label>
+      <input type="text" id="imageUrl" name="imageUrl" class="form-control" [(ngModel)]="event.imageUrl" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="date_event">Date de l'événement</label>
+      <input type="date" id="date_event" name="date_event" class="form-control" [(ngModel)]="event.date_event" required>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Ajouter l'événement</button>
+  </form>
+  
