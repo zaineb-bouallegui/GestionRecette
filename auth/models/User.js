@@ -19,7 +19,8 @@ const userSchema = new Schema({
   },
 
   token: { type: String },
-  resetToken: { type: String }
+  resetToken: { type: String },
+  
 });
 
 module.exports = mongoose.model("User", userSchema);

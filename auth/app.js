@@ -1,4 +1,5 @@
 const express = require('express');
+const cors=require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const http = require("http");
@@ -9,9 +10,15 @@ const cookieParser = require('cookie-parser');
 const router = require("./routes/user-routes");
 const uri = process.env.URI; 
 
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  credentials: true, // Active l'envoi de cookies et d'informations d'authentification
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
+
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
