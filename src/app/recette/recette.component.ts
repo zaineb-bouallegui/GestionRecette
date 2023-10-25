@@ -20,7 +20,9 @@ export class RecetteComponent implements OnInit {
   title: new FormControl('', [Validators.required]),
   description: new FormControl('', [Validators.required]),
   instructions: new FormControl('', [Validators.required]),
-  category: new FormControl(''),
+  category: new FormControl('desserts'),
+  averageRating: new FormControl([1, Validators.required]), // Default to 1 star
+
 
 
 })
@@ -56,7 +58,7 @@ export class RecetteComponent implements OnInit {
     let rec = this.reactiveForm.getRawValue();
     console.log("rec = ", rec);
     this.recetteService.addRecette(rec).subscribe();
-    this.message='Departement ajouté avec succés !'
+    this.message='Recette ajouté avec succés !'
     this.ajout=true;
 
   }
@@ -71,6 +73,10 @@ export class RecetteComponent implements OnInit {
   }
   get category(){
     return this.reactiveForm.get('category');
+  }
+
+  get averageRating(){
+    return this.reactiveForm.get('averageRating');
   }
 
 
