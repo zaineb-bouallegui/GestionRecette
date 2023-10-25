@@ -1,0 +1,15 @@
+<div class="col-md-8 offset-md-3">
+    <a [routerLink]="['/categorie-list']" class="btn btn-info mb-2">Voir liste</a>
+    <h2 class="mb-4">Créer Categorie</h2>
+  
+    
+  
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Nom catégorie</label>
+        <input type="text" class="form-control" id="nom" [(ngModel)]="categorie.nom" name="nom">
+      </div>
+      <button class="btn btn-success" type="submit">Ajouter</button>
+    </form>
+  </div>
+  

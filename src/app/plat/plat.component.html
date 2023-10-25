@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlOKPjb5R0nU7l2zxyQksjTI64ZCNcBgnmHBoayF9YwNo5c9B4PC6OWJZ+1Oj5b" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.min.js" integrity="sha384-bPv5sukTE1vBE7xe2n35DAuxKlp9g3de5wG6i5P08sXBkFf3dKYXn9px9PAqACD7P" crossorigin="anonymous"></script>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Yummy Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+</head>
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Yummy<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li class="dropdown">
+            <a href="#plats">
+              <span>Nos Plats</span>
+              <i class="bi bi-chevron-down dropdown-indicator"></i>
+            </a>
+            <ul>
+              <li><a href="#ajouter-plat">Ajouter plat</a></li>
+              <li><a href="#affecter-recette">Affecter une rectte à un plat</a></li>
+            </ul>
+          </li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#chefs">Chefs</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li class="dropdown">
+            <a href="#">
+              <span>Plat</span>
+              <i class="bi bi-chevron-down dropdown-indicator"></i>
+            </a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown">
+                <a href="#">
+                  <span>Deep Drop Down</span>
+                  <i class="bi bi-chevron-down dropdown-indicator"></i>
+                </a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn-book-a-table" href="#book-a-table">Book a Table</a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main id="main">
+    <!-- ======= Book A Table Section ======= -->
+    <section id="ajouter-plat" class="book-a-table">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <p>Ajouter <span>un plat</span></p>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-4 reservation-img" style="background-image: url(assets/img/reservation.jpg);" data-aos="zoom-out" data-aos-delay="100"></div>
+          <div class="col-lg-7 d-flex align-items-center reservation-form-bg">
+            <form (ngSubmit)="onSubmit()" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+              <div class="row gy-3">
+                <div class="col-lg-4 col-md-6">
+                  <input type="text" [(ngModel)]="platForm.nom" name="nom" class="form-control" id="nom" placeholder="Nom du plat">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <select [(ngModel)]="platForm.categorie" name="categorie" class="form-control" id="categorie">
+                    <option value="">Select a category</option>
+                    <option value="SALE">SALE</option>
+                    <option value="SUCRE">SUCRE</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <textarea [(ngModel)]="platForm.description" name="description" class="form-control" rows="5" placeholder="Description du plat"></textarea>
+              </div>
+              <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your plat has been added. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Ajouter le plat</button></div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- End Book A Table Section -->
+    
+    <!-- ======= Menu Section ======= -->
+    <section id="plats" class="menu">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>Nos plats</h2>
+          <p>Planifier <span>Vos plats</span> Avec Nous</p>
+        </div>
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
+              <h4>Sucré</h4>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+              <h4>Salé</h4>
+            </a>
+          </li>
+        </ul>
+    
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+          <div class="tab-pane fade" id="menu-lunch">
+            <div class="tab-header text-center">
+              <p>Plat</p>
+              <h3>Sucré</h3>
+            </div>
+            <div class="row gy-5">
+              <div class="col-lg-4 menu-item" *ngFor="let plat of platsSale">
+                <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                <h4>{{ plat.platName }}</h4>
+                <p class="ingredients">{{ plat.platDescription }}</p>
+                <button class="btn-book-a-table" data-bs-toggle="modal" data-bs-target="#myModal" (click)="openRecetteModal(plat)">Voir Recette</button>
+                <input type="datetime-local" [(ngModel)]="plat.selectedDate" name="datetime" id="datetime">
+                <button class="btn-book-a-table" (click)="selectedPlat = plat; onPlanifyClick()">Planifier</button>
+                <button class="btn-book-a-table" (click)="deletePlat(plat.id)">Delete</button>
+              </div>
+              
+            </div>
+          </div>
+    
+          <div class="tab-pane fade" id="menu-dinner">
+            <div class="tab-header text-center">
+              <p>Plat</p>
+              <h3>Salé</h3>
+            </div>
+            <div class="row gy-5">
+              <div class="col-lg-4 menu-item" *ngFor="let plat of platsSucre">
+                  <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                  <h4>{{ plat.platName }}</h4>
+                  <p class="ingredients">
+                    {{ plat.platDescription }}
+                  </p>
+                  <button class="btn-book-a-table" data-bs-toggle="modal" data-bs-target="#myModal" (click)="openRecetteModal(plat)">Voir Recette</button>
+                  <input type="datetime-local" [(ngModel)]="plat.selectedDate" name="datetime" id="datetime">
+                  <button class="btn-book-a-table" href="#book-a-table">Planifier</button>
+                  <button class="btn-book-a-table" (click)="deletePlat(plat.id)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- End Menu Section -->
+
+     <!-- ======= Affecter recette ======= -->
+     <section id="affecter-recette" class="book-a-table">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <p>Affecter <span>une recette</span> à <span>un plat</span></p>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-5 reservation-img">
+            <div class="col-lg-12 reservation-img" style="background-image: url(assets/img/recette.jpg);" data-aos="zoom-out" data-aos-delay="100"></div>
+          </div>
+          <div class="col-lg-7 d-flex align-items-center reservation-form-bg">
+            <form (ngSubmit)="assignRecetteToPlat(recetteId,platId)" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="50">
+              <div class="row gy-3">
+                <div class="col-lg-7 col-md-12">
+                  <select name="platId" class="custom-select" id="platId" [(ngModel)]="platId" required>
+                    <option value="" disabled>Select a plat</option>
+                    <!-- You can use *ngFor to loop through your plats and display them as options -->
+                    <option *ngFor="let plat of plats" [value]="plat.id">{{ plat.platName  }}</option>
+                  </select>
+                </div>
+                <div class="col-lg-7 col-md-6">
+                  <select name="recetteId" class="custom-select" id="recetteId" [(ngModel)]="recetteId" required>
+                    <option value="" disabled>Select a recette</option>
+                    <!-- You can use *ngFor to loop through your recettes and display them as options -->
+                    <option *ngFor="let recette of recettes" [value]="recette.id">{{ recette.name }}</option>
+                  </select>
+                </div>
+              </div>
+             
+              <div class="text-center">
+                <button type="submit">Affecter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+    <!-- End Book A Table Section -->
+  </main>
+   <!-- Modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recette Details</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>{{ selectedRecette?.platName }}</h5>
+        <p>{{ selectedRecette?.platDescription }}</p>
+        <h5>Recette Titre:</h5>
+        <p>{{ selectedRecette?.recetteTitre }}</p>
+        <h5>Recette Description:</h5>
+        <p>{{ selectedRecette?.recetteDescription }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- You can add additional buttons or actions here if needed -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ======= Planifications Section ======= -->
+<section id="planifications" class="planifications">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <h2>Your Planifications</h2>
+      <p>Here are your scheduled planifications</p>
+    </div>
+
+    <!-- Iterate through the user's planifications and display them -->
+    <div class="row gy-5">
+      <div class="col-lg-12">
+        <div class="planifications-list">
+          <!-- Use *ngFor to loop through user's planifications -->
+          <div *ngFor="let planification of userPlanifications">
+            <li>
+              <div class="planification-item">
+                <h6>{{ planification.planDateTime }}</h6>
+                <h6>{{ planification.platName }}</h6>
+                <button >Modify</button>
+                <button (click)="deletePlanification(planification.id)">Delete</button>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Planifications Section -->
+
+
+   <!-- ======= Footer ======= -->
+   <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-3">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <i class="bi bi-geo-alt icon"></i>
+          <div>
+            <h4>Address</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022 - US<br>
+            </p>
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links d-flex">
+          <i class="bi bi-telephone icon"></i>
+          <div>
+            <h4>Reservations</h4>
+            <p>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links d-flex">
+          <i class="bi bi-clock icon"></i>
+          <div>
+            <h4>Opening Hours</h4>
+            <p>
+              <strong>Mon-Sat: 11AM</strong> - 23PM<br>
+              Sunday: Closed
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Follow Us</h4>
+          <div class="social-links d-flex">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+</body>
+</html>

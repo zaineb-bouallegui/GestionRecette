@@ -1,0 +1,41 @@
+<div class="col-md-6 offset-md-3">
+    <h3> Ajouter Ingredient </h3>
+    <form (ngSubmit) = "onSubmit()">
+    
+        <div class="form-group">
+            <label> Nom</label>
+            <input type="text" class ="form-control" id = "nom"
+                [(ngModel)] = "ingredient.nom" name = "nom">
+        </div>
+    
+        <div class="form-group">
+            <label> Quantite</label>
+            <input type="text" class ="form-control" id = "quantite"
+                [(ngModel)] = "ingredient.quantite" name = "quantite">
+        </div>
+        
+        <div class="form-group">
+            <label>UniteDeMesure</label>
+            <input type="text" class ="form-control" id = "uniteDeMesure"
+                [(ngModel)] = "ingredient.uniteDeMesure" name = "uniteDeMesure">
+        </div>
+        
+        <div class="form-group">
+            <label>Stock</label>
+            <input type="text" class ="form-control" id = "stock"
+                [(ngModel)] = "ingredient.stock" name = "stock">
+        </div>
+        
+        <div class="form-group">
+            <label>Img</label>
+            <input type="file" class ="form-control" id = "imageUrl"
+                [(ngModel)] = "ingredient.imageUrl" name = "imageUrl">
+        </div>
+       
+          
+          
+    
+        <button class = "btn btn-success" type ="submit">Submit</button>
+    
+    </form>
+    </div> 
