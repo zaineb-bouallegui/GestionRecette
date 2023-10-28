@@ -1,0 +1,14 @@
+<div class="col-md-8 offset-md-3"><h2>Modifier Theme</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Titre</label>
+        <input type="text" class="form-control" id="titre" [(ngModel)]="theme.titre" name="titre">
+        <label>Description</label>
+        <input type="text" class="form-control" id="description" [(ngModel)]="theme.description" name="description">
+        <label>Nombre recettes</label>
+        <input type="text" class="form-control" id="nombre_rct" [(ngModel)]="theme.nombre_rct" name="nombre_rct">
+      </div>
+      <button class="btn btn-success" type="submit">Modifier</button>
+    </form>
+    </div>
+    

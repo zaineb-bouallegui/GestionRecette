@@ -1,0 +1,19 @@
+<div class="col-md-8 offset-md-3">
+    <a [routerLink]="['/theme-list']" class="btn btn-info mb-2">Voir liste</a>
+    <h2 class="mb-4">Créer theme</h2>
+  
+    
+  
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Titre theme</label>
+        <input type="text" class="form-control" id="titre" [(ngModel)]="theme.titre" name="titre">
+        <label for="nom">Description</label>
+        <input type="text" class="form-control" id="nom" [(ngModel)]="theme.description" name="description">
+        <label for="nom">Nombre recettes</label>
+        <input type="number" class="form-control" id="nom" [(ngModel)]="theme.nombre_rct" name="nombre_rct">
+      </div>
+      <button class="btn btn-success" type="submit">Ajouter</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,34 @@
+<h2> Employee List</h2>
+<table class = "table table-striped">
+    <thead>
+        <li> <a [routerLink]="['/createProfile']" mat-button>Add Un Profile</a></li>
+
+        
+        <tr>
+            <th> First Name</th>
+            <th> Last Name </th>
+            <th> img</th>
+            <th> isPublic</th>
+            <th> active</th>
+
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let profile of profiles" >
+            <td> {{ profile.nom }} </td>
+            <td> {{ profile.prenom }} </td>
+            <td> {{ profile.img }} </td>
+            <td> {{ profile.public }} </td>
+            <td> {{ profile.active }} </td>
+            <td>
+                <button (click) = " updateProfile(profile.id)" class = "btn btn-info"> Update</button>
+
+                <button (click) = "deleteProfile(profile.id)" class = "btn btn-danger" style="margin-left: 10px"> Delete</button>
+                <button (click) = "profileDetails(profile.id)" class = "btn btn-danger" style="margin-info: 10px">View</button>
+                
+
+            </td>
+        </tr>
+    </tbody>
+</table>
